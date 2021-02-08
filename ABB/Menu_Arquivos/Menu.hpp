@@ -1,5 +1,6 @@
 
 
+
 void menu( ArvoreABB& minhaArvore, Dado chave, char escolha ) {
     switch ( escolha ) {
     case 'i':
@@ -15,16 +16,5 @@ void menu( ArvoreABB& minhaArvore, Dado chave, char escolha ) {
         break;
     default:
         cout << "Comando Invalido!\n";
-    }
-}
-
-
-
-void leArquivo( ifstream& leitura, ArvoreABB& minhaArvore ) {
-    Dado d;
-    char escolha;
-    char virgula;
-    while ( leitura >> escolha >> virgula >> d ) {
-        menu( minhaArvore, d, escolha );
     }
 }

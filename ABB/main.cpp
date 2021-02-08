@@ -1,18 +1,16 @@
 #include <iostream>
 #include <fstream>
 
-typedef int Dado;
-
 using namespace std;
-
+typedef int Dado;
 class Noh {
     friend class ArvoreABB;
-    private:
+private:
     Noh* mEsquerdo;
     Noh* mDireito;
     Noh* mPai;
     Dado valor;
-    public:
+public:
     Noh( Dado d );
 };
 
@@ -25,9 +23,9 @@ Noh::Noh( Dado d ) {
 }
 
 class ArvoreABB {
-    private:
+private:
     Noh* mRaiz;
-    public:
+public:
     ArvoreABB();
     ~ArvoreABB();
     void insere( Dado d );
@@ -194,8 +192,9 @@ Dado ArvoreABB::Nivel( Dado chave ) {
 }
 
 
+#include "Menu_Arquivos/Arquivos.hpp"
 
-#include "Paralelo.hpp" 
+
 
 
 const string NOME_ARQUIVO = "teste.csv";
@@ -205,6 +204,7 @@ const string NOME_ARQUIVO = "teste.csv";
 int main() {
     ArvoreABB minhaArvore;
     ifstream leitura( NOME_ARQUIVO.c_str() );
+    leArquivo( leitura, minhaArvore );
     Dado chave;
     char escolha;
     cout << "\nDeseja fazer mais alguma alteracao?\n";
