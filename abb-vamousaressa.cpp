@@ -101,7 +101,8 @@ Noh* ArvoreABB::buscaAux( Noh* aux ) {
 }
 
 void ArvoreABB::Busca( Dado d ) {
-    Noh* nohComValor = buscaAux( d );
+    Noh* aux = new Noh( d );
+    Noh* nohComValor = buscaAux( aux );
     if ( nohComValor == NULL ) {
         cout << "NÃO ENCONTRADO";
     }
