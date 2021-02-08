@@ -198,8 +198,10 @@ Dado ArvoreABB::Nivel( Dado chave ) {
 
 void leArquivo( ifstream& leitura, ArvoreABB& minhaArvore ) {
     Dado d;
-    while ( leitura >> d ) {
-        minhaArvore.insere( d );
+    char escolha;
+    char virgula;
+    while ( leitura >> escolha >> virgula >> d ) {
+        menu( minhaArvore, d, escolha );
     }
 }
 
