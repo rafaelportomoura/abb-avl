@@ -1,17 +1,35 @@
 #include "Menu.hpp"
 #include <fstream>
 
-void leArquivoTeste( ifstream& leitura, ArvoreABB& minhaArvore, LINHA_CSV linhaCSV[ ] ) {
+void leArquivoEntrada( ifstream& leitura, ArvoreABB& minhaArvore, LINHA_CSV linhaCSV[ ] ) {
     Dado d;
     char escolha;
     char virgula;
     int cont = 0;
     while ( leitura >> escolha >> virgula >> d ) {
         menu( minhaArvore, d, escolha );
-        if ( escolha == 'i' && cont < QUANTIDADE_DE_INSERCAO ) {
+        if ( escolha == 'i' && cont < QUANTIDADE_DE_INSERCAO_E_REMOCAO ) {
             linhaCSV[cont].valor = d;
             linhaCSV[cont].insercao = CONTADOR_NO_INSERCAO;
             cont++;
+        }
+    }
+}
+
+
+void leArquivoRemocao( ifstream& leitura, ArvoreABB& minhaArvore, LINHA_CSV linhaCSV[ ] ) {
+    Dado d;
+    char escolha;
+    char virgula;
+    while ( leitura >> escolha >> virgula >> d ) {
+        menu( minhaArvore, d, escolha );
+        if ( escolha == 'r' ) {
+            for ( int i = 0; i < QUANTIDADE_DE_INSERCAO_E_REMOCAO; i++ ) {
+                if ( linhaCSV[i].valor == d ) {
+                    linhaCSV[i].remocao = CONTADOR_NO_REMOCAO;
+                }
+
+            }
         }
     }
 }
@@ -25,11 +43,16 @@ void nivel( ArvoreABB& minhaArvore, LINHA_CSV linhaCSV[ ], int posicao ) {
     linhaCSV[posicao].nivel = minhaArvore.Nivel( linhaCSV[posicao].valor );
 }
 
-void escreveArquivo( ofstream& escrita, ArvoreABB& minhaArvore, LINHA_CSV linhaCSV[ ] ) {
-    escrita << "valor,insercao,busca,nivel\n";
-    for ( int i = 0; i < QUANTIDADE_DE_INSERCAO; i++ ) {
+void atualizaLinhaCSV( ArvoreABB& minhaArvore, LINHA_CSV linhaCSV[ ] ) {
+    for ( int i = 0; i < QUANTIDADE_DE_INSERCAO_E_REMOCAO; i++ ) {
         buscaValor( minhaArvore, linhaCSV, i );
         nivel( minhaArvore, linhaCSV, i );
-        escrita << linhaCSV[i].valor << ',' << linhaCSV[i].insercao << ',' << linhaCSV[i].busca << ',' << linhaCSV[i].nivel << "\n";
+    }
+}
+
+void escreveArquivo( ofstream& escrita, ArvoreABB& minhaArvore, LINHA_CSV linhaCSV[ ] ) {
+    escrita << "valor,insercao,busca,nivel,remocao\n";
+    for ( int i = 0; i < QUANTIDADE_DE_INSERCAO_E_REMOCAO; i++ ) {
+        escrita << linhaCSV[i].valor << ',' << linhaCSV[i].insercao << ',' << linhaCSV[i].busca << ',' << linhaCSV[i].nivel << ',' << linhaCSV[i].remocao << "\n";
     }
 }

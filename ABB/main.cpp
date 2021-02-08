@@ -116,6 +116,7 @@ void ArvoreABB::Busca( Dado d ) {
 
 void ArvoreABB::transplanta( Noh* antigo, Noh* novo ) {
     //Troca dois nos
+    CONTADOR_NO_REMOCAO++;
     if ( mRaiz == antigo ) {
         mRaiz = novo;
     }
@@ -134,7 +135,7 @@ void ArvoreABB::remove( Dado d ) {
     //Remove um elemento (noh) da arvore
     Noh* aux = new Noh( d );
     Noh* remover = buscaAux( aux );
-
+    CONTADOR_NO_REMOCAO = CONTADOR_NO_BUSCA;
     if ( remover == NULL ) {
         cout << "ERRO" << endl;
     }
@@ -206,10 +207,13 @@ Dado ArvoreABB::Nivel( Dado chave ) {
 
 int main() {
     ArvoreABB minhaArvore;
-    LINHA_CSV linhaCSV[QUANTIDADE_DE_INSERCAO];
-    ifstream leitura( NOME_ARQUIVO_TESTE.c_str() );
+    LINHA_CSV linhaCSV[QUANTIDADE_DE_INSERCAO_E_REMOCAO];
+    ifstream leituraEntrada( NOME_ARQUIVO_TESTE.c_str() );
     ofstream escrita( NOME_ARQUIVO_ESCRITA.c_str() );
-    leArquivoTeste( leitura, minhaArvore, linhaCSV );
+    leArquivoEntrada( leituraEntrada, minhaArvore, linhaCSV );
+    atualizaLinhaCSV( minhaArvore, linhaCSV );
+    ifstream leituraRemocao( NOME_ARQUIVO_REMOCAO.c_str() );
+    leArquivoRemocao( leituraRemocao, minhaArvore, linhaCSV );
     escreveArquivo( escrita, minhaArvore, linhaCSV );
     Dado chave;
     char escolha;
