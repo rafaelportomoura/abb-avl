@@ -13,6 +13,5 @@ struct LINHA_CSV {
     Dado valor;
     int busca;
     int insercao;
-    int nivel;
     int remocao;
 };

@@ -39,20 +39,16 @@ void buscaValor( ArvoreABB& minhaArvore, LINHA_CSV linhaCSV[ ], int posicao ) {
     linhaCSV[posicao].busca = CONTADOR_NO_BUSCA;
 }
 
-void nivel( ArvoreABB& minhaArvore, LINHA_CSV linhaCSV[ ], int posicao ) {
-    linhaCSV[posicao].nivel = minhaArvore.Nivel( linhaCSV[posicao].valor );
-}
 
 void atualizaLinhaCSV( ArvoreABB& minhaArvore, LINHA_CSV linhaCSV[ ] ) {
     for ( int i = 0; i < QUANTIDADE_DE_INSERCAO_E_REMOCAO; i++ ) {
         buscaValor( minhaArvore, linhaCSV, i );
-        nivel( minhaArvore, linhaCSV, i );
     }
 }
 
 void escreveArquivo( ofstream& escrita, ArvoreABB& minhaArvore, LINHA_CSV linhaCSV[ ] ) {
-    escrita << "valor,insercao,busca,nivel,remocao\n";
+    escrita << "valor,insercao,busca,remocao\n";
     for ( int i = 0; i < QUANTIDADE_DE_INSERCAO_E_REMOCAO; i++ ) {
-        escrita << linhaCSV[i].valor << ',' << linhaCSV[i].insercao << ',' << linhaCSV[i].busca << ',' << linhaCSV[i].nivel << ',' << linhaCSV[i].remocao << "\n";
+        escrita << linhaCSV[i].valor << ',' << linhaCSV[i].insercao << ',' << linhaCSV[i].busca << ',' << linhaCSV[i].remocao << "\n";
     }
 }
