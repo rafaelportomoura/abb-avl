@@ -6,12 +6,12 @@ using namespace std;
 
 class Noh {
     friend class ArvoreABB;
-private:
+    private:
     Noh* mEsquerdo;
     Noh* mDireito;
     Noh* mPai;
     Dado valor;
-public:
+    public:
     Noh( Dado d );
 };
 
@@ -24,9 +24,9 @@ Noh::Noh( Dado d ) {
 }
 
 class ArvoreABB {
-private:
+    private:
     Noh* mRaiz;
-public:
+    public:
     ArvoreABB();
     ~ArvoreABB();
     void insere( Dado d );
@@ -82,8 +82,11 @@ void ArvoreABB::insere( Dado d ) {
 Noh* ArvoreABB::buscaAux( Noh* aux ) {
     //Faz a busca na estrutura e retorna
     Noh* atual = mRaiz;
+    int contador_procura = 0;
     while ( atual != NULL ) {
+        contador_procura++;
         if ( atual->valor == aux->valor ) {
+            cout << "Contador procura: " << contador_procura << endl;
             return atual;
         }
         else if ( atual->valor > aux->valor ) {
@@ -93,6 +96,7 @@ Noh* ArvoreABB::buscaAux( Noh* aux ) {
             atual = atual->mDireito;
         }
     }
+    cout << "Contador procura: " << contador_procura << endl;
     return atual;
 }
 
