@@ -9,12 +9,12 @@ typedef int Dado;
 
 class Noh {
     friend class ArvoreABB;
-    private:
+private:
     Noh* mEsquerdo;
     Noh* mDireito;
     Noh* mPai;
     Dado valor;
-    public:
+public:
     Noh( Dado d );
 };
 
@@ -27,9 +27,9 @@ Noh::Noh( Dado d ) {
 }
 
 class ArvoreABB {
-    private:
+private:
     Noh* mRaiz;
-    public:
+public:
     ArvoreABB();
     ~ArvoreABB();
     void insere( Dado d );
@@ -116,7 +116,6 @@ void ArvoreABB::Busca( Dado d ) {
 
 void ArvoreABB::transplanta( Noh* antigo, Noh* novo ) {
     //Troca dois nos
-    CONTADOR_NO_REMOCAO++;
     if ( mRaiz == antigo ) {
         mRaiz = novo;
     }
