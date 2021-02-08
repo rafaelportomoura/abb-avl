@@ -3,14 +3,18 @@
 
 using namespace std;
 typedef int Dado;
+
+#include "config.hpp" 
+
+
 class Noh {
     friend class ArvoreABB;
-private:
+    private:
     Noh* mEsquerdo;
     Noh* mDireito;
     Noh* mPai;
     Dado valor;
-public:
+    public:
     Noh( Dado d );
 };
 
@@ -23,9 +27,9 @@ Noh::Noh( Dado d ) {
 }
 
 class ArvoreABB {
-private:
+    private:
     Noh* mRaiz;
-public:
+    public:
     ArvoreABB();
     ~ArvoreABB();
     void insere( Dado d );
@@ -81,11 +85,10 @@ void ArvoreABB::insere( Dado d ) {
 Noh* ArvoreABB::buscaAux( Noh* aux ) {
     //Faz a busca na estrutura e retorna
     Noh* atual = mRaiz;
-    int contador_procura = 0;
+    CONTADOR_NO_BUSCA = 0;
     while ( atual != NULL ) {
-        contador_procura++;
+        CONTADOR_NO_BUSCA++;
         if ( atual->valor == aux->valor ) {
-            cout << "Contador procura: " << contador_procura << endl;
             return atual;
         }
         else if ( atual->valor > aux->valor ) {
@@ -95,7 +98,6 @@ Noh* ArvoreABB::buscaAux( Noh* aux ) {
             atual = atual->mDireito;
         }
     }
-    cout << "Contador procura: " << contador_procura << endl;
     return atual;
 }
 
@@ -197,14 +199,16 @@ Dado ArvoreABB::Nivel( Dado chave ) {
 
 
 
-const string NOME_ARQUIVO = "teste.csv";
 
 
 
 int main() {
     ArvoreABB minhaArvore;
-    ifstream leitura( NOME_ARQUIVO.c_str() );
-    leArquivo( leitura, minhaArvore );
+    LINHA_CSV linhaCSV[QUANTIDADE_DE_INSERCAO];
+    ifstream leitura( NOME_ARQUIVO_TESTE.c_str() );
+    ofstream escrita( NOME_ARQUIVO_ESCRITA.c_str() );
+    leArquivoTeste( leitura, minhaArvore, linhaCSV );
+    escreveArquivo( escrita, minhaArvore, linhaCSV );
     Dado chave;
     char escolha;
     cout << "\nDeseja fazer mais alguma alteracao?\n";
