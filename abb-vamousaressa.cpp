@@ -107,10 +107,10 @@ void ArvoreABB::Busca( Dado d ) {
     Noh* aux = new Noh( d );
     Noh* nohComValor = buscaAux( aux );
     if ( nohComValor == NULL ) {
-        cout << "NÃO ENCONTRADO";
+        cout << "NÃO ENCONTRADO\n";
     }
     else {
-        cout << "ENCONTRADO";
+        cout << "ENCONTRADO\n";
     }
 }
 
@@ -219,7 +219,7 @@ void menu( ArvoreABB& minhaArvore, Dado chave, char escolha ) {
     case 'q':
         break;
     default:
-        cout << "Comando Invalido!";
+        cout << "Comando Invalido!\n";
     }
 }
 
@@ -228,6 +228,7 @@ int main() {
     ifstream leitura( NOME_ARQUIVO.c_str() );
     Dado chave;
     char escolha;
+    cout << "\nDeseja fazer mais alguma alteracao?\n";
     cin >> escolha;
     while ( escolha != 'q' ) {
         if ( escolha == 'i' || escolha == 'r' || escolha == 'b' ) {
