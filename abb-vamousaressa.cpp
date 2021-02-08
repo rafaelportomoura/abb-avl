@@ -1,8 +1,11 @@
 #include <iostream>
+#include <fstream>
 
 typedef int Dado;
 
 using namespace std;
+
+const string NOME_ARQUIVO = "teste.csv";
 
 class Noh {
     friend class ArvoreABB;
@@ -192,34 +195,45 @@ Dado ArvoreABB::Nivel( Dado chave ) {
     return cont;
 }
 
+
+void leArquivo( ifstream& leitura, ArvoreABB& minhaArvore ) {
+    Dado d;
+    while ( leitura >> d ) {
+        minhaArvore.insere( d );
+    }
+}
+
+void menu( ArvoreABB& minhaArvore, Dado chave, char escolha ) {
+    switch ( escolha ) {
+    case 'i':
+        minhaArvore.insere( chave );
+        break;
+    case 'r':
+        minhaArvore.remove( chave );
+        break;
+    case 'b':
+        minhaArvore.Busca( chave );
+        break;
+    case 'q':
+        break;
+    default:
+        cout << "Comando Invalido!";
+    }
+}
+
 int main() {
     ArvoreABB minhaArvore;
+    ifstream leitura( NOME_ARQUIVO.c_str() );
+    Dado chave;
     char escolha;
     cin >> escolha;
-    int busca;
-    Dado chave;
-    do {
-        switch ( escolha ) {
-        case 'i':
+    while ( escolha != 'q' ) {
+        if ( escolha == 'i' || escolha == 'r' || escolha == 'b' ) {
             cin >> chave;
-            minhaArvore.insere( chave );
-            break;
-        case 'r':
-            cin >> chave;
-            minhaArvore.remove( chave );
-            break;
-        case 'b':
-            cin >> busca;
-            //nao implementado (implementar na forma chave,valor [noh/busca])
-        case 'q':
-            break;
-        default:
-            cout << "Comando Invalido!";
         }
+        menu( minhaArvore, chave, escolha );
         cin >> escolha;
-    } while ( escolha != 'q' );
-
-
+    }
     return 0;
 }
 
