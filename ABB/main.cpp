@@ -56,6 +56,7 @@ ArvoreABB::~ArvoreABB() {
 void ArvoreABB::insere( Dado d ) {
     //Insere interativamente
     Noh* novo = new Noh( d );
+    CONTADOR_NO_INSERCAO = 1;
     if ( mRaiz == NULL ) {
         mRaiz = novo;
     }
@@ -71,6 +72,7 @@ void ArvoreABB::insere( Dado d ) {
             else {
                 atual = atual->mDireito;
             }
+            CONTADOR_NO_INSERCAO++;
         }
         novo->mPai = ant;
         if ( ant->valor > novo->valor ) {
