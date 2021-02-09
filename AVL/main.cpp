@@ -111,13 +111,17 @@ void avl::destruirRecursivamente( noh* umNoh ) {
 }
 
 void avl::insere( const Dado& umDado ) {
+    CONTADOR_NO_INSERCAO = 0;
+    isINSERCAO = true;
     raiz = insereAux( raiz, umDado );
+    isINSERCAO = false;
 }
 
 // inserção recursiva, devolve nó para atribuição de pai ou raiz
 noh* avl::insereAux( noh* umNoh, const Dado& umDado ) {
     noh* novo;
     novo = new noh( umDado );
+    CONTADOR_NO_INSERCAO++;
     if ( umNoh == NULL ) {
         return novo;
     }
@@ -168,6 +172,8 @@ noh* avl::rotacaoEsquerda( noh* umNoh ) {
     aux->esq = umNoh;
     umNoh->atualizaAltura();
     aux->atualizaAltura();
+    if (isINSERCAO) CONTADOR_NO_INSERCAO++;
+    if (isREMOCAO) CONTADOR_NO_REMOCAO++;
     return aux;
 }
 
@@ -182,6 +188,8 @@ noh* avl::rotacaoDireita( noh* umNoh ) {
     aux->dir = umNoh;
     umNoh->atualizaAltura();
     aux->atualizaAltura();
+    if ( isINSERCAO ) CONTADOR_NO_INSERCAO++;
+    if ( isREMOCAO ) CONTADOR_NO_REMOCAO++;
     return aux;
 }
 
@@ -190,7 +198,9 @@ noh* avl::rotacaoDireita( noh* umNoh ) {
 noh* avl::buscaAux( Dado chave ) {
     noh* busca;
     busca = raiz;
+    CONTADOR_NO_BUSCA = 0;
     while ( busca != NULL ) {
+        CONTADOR_NO_BUSCA++;
         if ( chave == busca->elemento ) {
             return busca;
         }
@@ -237,7 +247,10 @@ noh* avl::removeMenor( noh* raizSub ) {
 
 // remoção recursiva
 void avl::remove( Dado chave ) {
+    CONTADOR_NO_REMOCAO = 0;
+    isREMOCAO = true;
     raiz = removeAux( raiz, chave );
+    isREMOCAO = false;
 }
 
 noh* avl::removeAux( noh* umNoh, Dado chave ) {
@@ -246,6 +259,7 @@ noh* avl::removeAux( noh* umNoh, Dado chave ) {
     }
     noh* raizSubArvore;
     raizSubArvore = umNoh;
+    CONTADOR_NO_REMOCAO++;
     if ( chave < umNoh->elemento ) {
         umNoh->esq = removeAux( umNoh->esq, chave );
     }
@@ -340,6 +354,11 @@ int main() {
     ifstream leituraEntrada(NOME_ARQUIVO_TESTE.c_str());
     LINHA_CSV linhaCSV[QUANTIDADE_DE_INSERCAO_E_REMOCAO];
     leEntrada(leituraEntrada,arvore,linhaCSV);
+    atribuiBuscaAoCSV(arvore, linhaCSV);
+    ifstream leituraRemocao(NOME_ARQUIVO_REMOCAO.c_str());
+    leRemocao(leituraRemocao,arvore,linhaCSV);
+    ofstream escrita( NOME_ARQUIVO_ESCRITA.c_str());
+    escreveArquivo(escrita,arvore,linhaCSV);
 
     do{
         cout<<"Deseja fazer alguma alteracao?\n";
