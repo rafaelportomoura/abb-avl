@@ -52,3 +52,15 @@ void escreveArquivo( ofstream& escrita, ArvoreABB& minhaArvore, LINHA_CSV linhaC
         escrita << linhaCSV[i].valor << ',' << linhaCSV[i].insercao << ',' << linhaCSV[i].busca << ',' << linhaCSV[i].remocao << "\n";
     }
 }
+
+
+void buscaValoresInexistentes( ifstream& leitura, ArvoreABB& minhaArvore, ofstream& escrita ) {
+    Dado umDado;
+    char operacao;
+    char virgula;
+    escrita << "valor,busca\n";
+    while ( leitura >> operacao >> virgula >> umDado ) {
+        menu( minhaArvore, umDado, operacao );
+        escrita << umDado << ',' << CONTADOR_NO_BUSCA << endl;
+    }
+}

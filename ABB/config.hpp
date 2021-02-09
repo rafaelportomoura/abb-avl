@@ -7,6 +7,10 @@ const int QUANTIDADE_DE_INSERCAO_E_REMOCAO = 100;
 
 const string NOME_ARQUIVO_TESTE = "../arquivos/entrada.csv";
 const string NOME_ARQUIVO_REMOCAO = "../arquivos/remocao.csv";
+
+const string NOME_ARQUIVO_BUSCA = "../arquivos/busca.csv";
+const string NOME_ARQUIVO_ESCRITA_BUSCA = "../arquivos/abb-busca.csv";
+
 const string NOME_ARQUIVO_ESCRITA = "../arquivos/abb.csv";
 
 struct LINHA_CSV {

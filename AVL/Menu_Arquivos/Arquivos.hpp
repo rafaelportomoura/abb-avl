@@ -42,6 +42,17 @@ void atribuiBuscaAoCSV( avl& arvore, LINHA_CSV linhaCSV[ ] ) {
     }
 }
 
+void buscaValoresInexistentes( ifstream& leitura, avl& arvore, ofstream& escrita ) {
+    Dado umDado;
+    char operacao;
+    char virgula;
+    escrita << "valor,busca\n";
+    while ( leitura >> operacao >> virgula >> umDado ) {
+        menu( arvore, operacao, umDado );
+        escrita << umDado << ',' << CONTADOR_NO_BUSCA << endl;
+    }
+}
+
 void escreveArquivo( ofstream& escrita, avl& arvore, LINHA_CSV linhaCSV[ ] ) {
     escrita << "valor,insercao,busca,remocao\n";
     for ( int posicao = 0; posicao < QUANTIDADE_DE_INSERCAO_E_REMOCAO; posicao++ ) {

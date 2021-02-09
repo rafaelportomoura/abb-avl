@@ -354,11 +354,14 @@ int main() {
     ifstream leituraEntrada(NOME_ARQUIVO_TESTE.c_str());
     LINHA_CSV linhaCSV[QUANTIDADE_DE_INSERCAO_E_REMOCAO];
     leEntrada(leituraEntrada,arvore,linhaCSV);
-    atribuiBuscaAoCSV(arvore, linhaCSV);
+    atribuiBuscaAoCSV( arvore, linhaCSV );
+    ifstream leituraBusca( NOME_ARQUIVO_BUSCA.c_str() );
+    ofstream escritaBusca( NOME_ARQUIVO_ESCRITA_BUSCA.c_str() );
+    buscaValoresInexistentes( leituraBusca, arvore, escritaBusca );
     ifstream leituraRemocao(NOME_ARQUIVO_REMOCAO.c_str());
     leRemocao(leituraRemocao,arvore,linhaCSV);
     ofstream escrita( NOME_ARQUIVO_ESCRITA.c_str());
-    escreveArquivo(escrita,arvore,linhaCSV);
+    escreveArquivo( escrita, arvore, linhaCSV );
 
     do{
         cout<<"Deseja fazer alguma alteracao?\n";

@@ -9,12 +9,12 @@ typedef int Dado;
 
 class Noh {
     friend class ArvoreABB;
-private:
+    private:
     Noh* mEsquerdo;
     Noh* mDireito;
     Noh* mPai;
     Dado valor;
-public:
+    public:
     Noh( Dado d );
 };
 
@@ -27,9 +27,9 @@ Noh::Noh( Dado d ) {
 }
 
 class ArvoreABB {
-private:
+    private:
     Noh* mRaiz;
-public:
+    public:
     ArvoreABB();
     ~ArvoreABB();
     void insere( Dado d );
@@ -211,6 +211,10 @@ int main() {
     ofstream escrita( NOME_ARQUIVO_ESCRITA.c_str() );
     leArquivoEntrada( leituraEntrada, minhaArvore, linhaCSV );
     atualizaLinhaCSV( minhaArvore, linhaCSV );
+
+    ifstream leituraBusca( NOME_ARQUIVO_BUSCA.c_str() );
+    ofstream escritaBusca( NOME_ARQUIVO_ESCRITA_BUSCA.c_str() );
+    buscaValoresInexistentes( leituraBusca, minhaArvore, escritaBusca );
     ifstream leituraRemocao( NOME_ARQUIVO_REMOCAO.c_str() );
     leArquivoRemocao( leituraRemocao, minhaArvore, linhaCSV );
     escreveArquivo( escrita, minhaArvore, linhaCSV );
